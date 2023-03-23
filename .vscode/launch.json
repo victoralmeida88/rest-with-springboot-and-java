@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "StartUp",
+      "request": "launch",
+      "mainClass": "StartUp",
+      "projectName": "rest-with-springboot-and-java"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-StartUp<rest-with-springboot-and-java>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
