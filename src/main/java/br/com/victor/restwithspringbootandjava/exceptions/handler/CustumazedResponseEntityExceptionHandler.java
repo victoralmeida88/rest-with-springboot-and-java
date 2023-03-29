@@ -2,6 +2,7 @@ package br.com.victor.restwithspringbootandjava.exceptions.handler;
 
 import java.util.Date;
 
+import br.com.victor.restwithspringbootandjava.exceptions.RequiredObjectIsNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +27,13 @@ public class CustumazedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionsResponse> handleNotFoundException(Exception ex, WebRequest request) {
+        ExceptionsResponse exceptionsResponse = new ExceptionsResponse(
+                new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionsResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionsResponse> handleBadRequestException(Exception ex, WebRequest request) {
         ExceptionsResponse exceptionsResponse = new ExceptionsResponse(
                 new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionsResponse, HttpStatus.NOT_FOUND);
